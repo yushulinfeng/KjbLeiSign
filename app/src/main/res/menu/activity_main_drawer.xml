@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_sign"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="签到" />
+        <item
+            android:id="@+id/nav_class"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="课表" />
+        <item
+            android:id="@+id/nav_tell"
+            android:icon="@drawable/ic_menu_share"
+            android:title="公告" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_set"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="设置" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_menu_send"
+                android:title="注销" />
+        </menu>
+    </item>
+
+</menu>
