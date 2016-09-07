@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import org.kjb.lei.sign.R;
+import org.kjb.lei.sign.utils.all.StaticMethod;
 import org.kjb.lei.sign.utils.base.BaseActivity;
 
 import butterknife.Bind;
@@ -40,6 +41,7 @@ public class Login extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_btn_login:
+                StaticMethod.showToast("登录");
                 break;
             case R.id.login_btn_register:
                 startActivity(new Intent(this, Register.class));

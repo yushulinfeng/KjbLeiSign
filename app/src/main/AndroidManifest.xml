@@ -27,9 +27,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".start.Register"
-            android:windowSoftInputMode="adjustResize|stateVisible" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".start.Login"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
 
         <!--BaiDu Map-->

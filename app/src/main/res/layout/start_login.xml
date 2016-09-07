@@ -43,7 +43,7 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/login_et_pass"
@@ -56,7 +56,7 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <CheckBox
             android:id="@+id/login_cb_teacher"
@@ -72,7 +72,7 @@
             android:layout_margin="5dp"
             android:padding="5dp"
             android:text="登录"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <Button
@@ -84,5 +84,5 @@
         android:background="@null"
         android:text="教师注册"
         android:textColor="@color/colorPrimary"
-        android:textSize="16sp" />
+        android:textSize="12sp" />
 </RelativeLayout>

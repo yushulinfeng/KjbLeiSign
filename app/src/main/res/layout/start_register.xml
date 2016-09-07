@@ -42,7 +42,7 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/register_et_pass1"
@@ -55,7 +55,7 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/register_et_pass2"
@@ -68,7 +68,7 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/register_et_realname"
@@ -81,7 +81,7 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/register_btn_register"
@@ -90,7 +90,7 @@
             android:layout_margin="5dp"
             android:padding="5dp"
             android:text="注册"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <Button
@@ -101,5 +101,5 @@
         android:background="@null"
         android:text="返回登录"
         android:textColor="@color/colorPrimary"
-        android:textSize="16sp" />
+        android:textSize="12sp" />
 </LinearLayout>
