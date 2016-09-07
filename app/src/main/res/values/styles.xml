@@ -2,10 +2,10 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/fadeActivityTheme</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -17,4 +17,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- 淡入淡出动画 -->
+    <style name="fadeActivityTheme" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in_200</item>
+        <item name="android:activityOpenExitAnimation">@anim/fade_out_200</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fade_in_200</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out_200</item>
+    </style>
 </resources>

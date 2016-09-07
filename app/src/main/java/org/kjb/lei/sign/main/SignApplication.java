@@ -18,4 +18,10 @@ public class SignApplication extends Application {
         return instance;
     }
 
+    /**
+     * 初始化百度地图
+     */
+    private void initBaiduMap() {
+//        SDKInitializer.initialize(this);
+    }
 }

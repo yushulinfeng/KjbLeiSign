@@ -66,8 +66,6 @@ public class SignMain extends BaseActivity
 
         } else if (id == R.id.nav_tell) {
 
-        } else if (id == R.id.nav_set) {
-
         } else if (id == R.id.nav_logout) {
 
         }
