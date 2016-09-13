@@ -15,7 +15,7 @@ import org.kjb.lei.sign.utils.base.BaseActivity;
 import butterknife.Bind;
 
 /**
- * Created by YuShuLinFeng on 2016/9/6.
+ * 主界面
  */
 @SuppressWarnings({"deprecation", "ConstantConditions"})
 public class SignMain extends BaseActivity

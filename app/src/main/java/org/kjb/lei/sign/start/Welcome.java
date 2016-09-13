@@ -9,7 +9,7 @@ import org.kjb.lei.sign.utils.base.BaseActivity;
 import org.kjb.lei.sign.utils.tools.UserTool;
 
 /**
- * Created by YuShuLinFeng on 2016/9/7.
+ * 欢迎界面
  */
 public class Welcome extends BaseActivity {
     private String[] user = null;

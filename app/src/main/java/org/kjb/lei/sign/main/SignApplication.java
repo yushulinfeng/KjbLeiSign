@@ -3,7 +3,7 @@ package org.kjb.lei.sign.main;
 import android.app.Application;
 
 /**
- * Created by YuShuLinFeng on 2016/9/6.
+ * 应用层
  */
 public class SignApplication extends Application {
     private static SignApplication instance;

@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+/**
+ * 数据存储工具类
+ */
 public class ShareTool {
 
     public static void saveText(Context context, String save_path, String text) {

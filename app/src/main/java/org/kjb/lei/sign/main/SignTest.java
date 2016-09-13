@@ -18,7 +18,7 @@ import org.kjb.lei.sign.start.Register;
 import org.kjb.lei.sign.start.Welcome;
 
 /**
- * Created by YuShuLinFeng on 2016/9/7.
+ * 测试界面
  */
 public class SignTest extends Activity {
     private Context context;

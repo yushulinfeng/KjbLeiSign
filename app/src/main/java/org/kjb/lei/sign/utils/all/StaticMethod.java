@@ -11,9 +11,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import org.kjb.lei.sign.main.SignApplication;
+import org.kjb.lei.sign.utils.connect.ConnectEasy;
+import org.kjb.lei.sign.utils.connect.ConnectListener;
 
 /**
- * Created by YuShuLinFeng on 2016/9/6.
+ * 方法整合工具类
  */
 public class StaticMethod {
     private static Handler handler = new Handler();
@@ -107,6 +109,11 @@ public class StaticMethod {
         }
     }
 
-
+    /**
+     * 发起网络请求
+     */
+    public static void POST(String url, final ConnectListener listener) {
+        ConnectEasy.POST(url, listener);
+    }
 
 }

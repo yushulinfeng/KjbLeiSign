@@ -14,7 +14,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * Created by YuShuLinFeng on 2016/9/7.
+ * 登录界面
  */
 public class Login extends BaseActivity {
 

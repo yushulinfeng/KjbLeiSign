@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * Created by YuShuLinFeng on 2016/9/8.
+ * 用户存储工具类
  */
 public class UserTool {
     private static final String USER_LOGIN_INFO = "user_info";

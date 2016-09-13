@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
 
-
+/**
+ * 基础类（活动）
+ */
 public abstract class BaseActivity extends AppCompatActivity {
 
     @Override

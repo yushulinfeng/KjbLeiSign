@@ -13,7 +13,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * Created by YuShuLinFeng on 2016/9/7.
+ * 教师注册界面
  */
 public class Register extends BaseActivity {
 
