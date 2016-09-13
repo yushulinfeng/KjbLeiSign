@@ -36,9 +36,6 @@ public class PositionTool {
         }
         @SuppressWarnings("MissingPermission")
         Location location = manager.getLastKnownLocation(provider);
-        Log.e("EEEEE", location.getLatitude() + "-" + location.getLongitude());
-        StaticMethod.showLongToast(location.getLatitude() + "\n" + location.getLongitude());
-        //+ 0.0004// + 0.006
         return new Point(location.getLatitude(), location.getLongitude());
     }
 

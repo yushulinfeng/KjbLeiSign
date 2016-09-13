@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import org.kjb.lei.sign.start.Login;
 import org.kjb.lei.sign.start.Register;
 import org.kjb.lei.sign.start.Welcome;
+import org.kjb.lei.sign.utils.all.StaticMethod;
 import org.kjb.lei.sign.utils.tools.PositionTool;
 
 /**
@@ -104,7 +106,9 @@ public class SignTest extends Activity {
         addButton("定位", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new PositionTool(context).getPosition();
+                PositionTool.Point p = new PositionTool(context).getPosition();
+                Log.e("EEEEE", p.x + "-" + p.y);
+                StaticMethod.showLongToast(p.x + "\n" + p.y);
             }
         });
         addButton("欢迎", Welcome.class);
