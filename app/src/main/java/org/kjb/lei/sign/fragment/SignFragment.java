@@ -17,4 +17,5 @@ public class SignFragment extends BaseFragment {
     protected void afterCreate() {
 
     }
+
 }

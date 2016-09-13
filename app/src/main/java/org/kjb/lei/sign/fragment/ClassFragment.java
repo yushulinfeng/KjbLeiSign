@@ -17,4 +17,5 @@ public class ClassFragment extends BaseFragment {
     protected void afterCreate() {
 
     }
+
 }

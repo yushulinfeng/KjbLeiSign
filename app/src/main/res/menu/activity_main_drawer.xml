@@ -10,10 +10,6 @@
             android:id="@+id/nav_class"
             android:icon="@drawable/ic_menu_gallery"
             android:title="课表" />
-        <item
-            android:id="@+id/nav_tell"
-            android:icon="@drawable/ic_menu_share"
-            android:title="公告" />
     </group>
 
     <item android:title="账户">
