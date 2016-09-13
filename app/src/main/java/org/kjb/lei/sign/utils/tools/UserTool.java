@@ -18,17 +18,20 @@ public class UserTool {
                 USER_LOGIN_INFO, Activity.MODE_PRIVATE);
         String name = mPref.getString("name", "");
         String pass = mPref.getString("pass", "");
-        return new String[]{name, pass};
+        String tea = mPref.getString("teacher", "0");//0学生，1教师
+        return new String[]{name, pass, tea};
     }
 
     /**
      * 存储用户名、密码
      */
-    public static void saveUserInfo(Context context, String name, String pass) {
+    public static void saveUserInfo(Context context, String name,
+                                    String pass, boolean is_teacher) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(
                 USER_LOGIN_INFO, Activity.MODE_PRIVATE).edit();
         prefs.putString("name", name);
         prefs.putString("pass", pass);
+        prefs.putBoolean("teacher", is_teacher);
         prefs.commit();
     }
 

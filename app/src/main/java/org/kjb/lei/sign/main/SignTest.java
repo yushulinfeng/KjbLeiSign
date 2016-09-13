@@ -16,6 +16,7 @@ import android.widget.Toast;
 import org.kjb.lei.sign.start.Login;
 import org.kjb.lei.sign.start.Register;
 import org.kjb.lei.sign.start.Welcome;
+import org.kjb.lei.sign.utils.tools.PositionTool;
 
 /**
  * 测试界面
@@ -98,6 +99,12 @@ public class SignTest extends Activity {
             @Override
             public void onClick(View v) {
                 showToast("TEST");
+            }
+        });
+        addButton("定位", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new PositionTool(context).getPosition();
             }
         });
         addButton("欢迎", Welcome.class);

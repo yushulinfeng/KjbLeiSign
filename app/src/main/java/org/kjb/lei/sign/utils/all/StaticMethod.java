@@ -30,6 +30,14 @@ public class StaticMethod {
     }
 
     /**
+     * 显示长提示信息
+     */
+    public static void showLongToast(String text) {
+        if (text != null)
+            Toast.makeText(SignApplication.getInstance(), text, Toast.LENGTH_LONG).show();
+    }
+
+    /**
      * 在非UI线程，显示提示信息
      */
     public static void showThreadToast(final String text) {

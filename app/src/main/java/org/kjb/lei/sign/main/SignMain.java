@@ -15,7 +15,7 @@ import org.kjb.lei.sign.utils.base.BaseActivity;
 import butterknife.Bind;
 
 /**
- * 主界面
+ * 主界面（建议使用TimerTask）
  */
 @SuppressWarnings({"deprecation", "ConstantConditions"})
 public class SignMain extends BaseActivity
