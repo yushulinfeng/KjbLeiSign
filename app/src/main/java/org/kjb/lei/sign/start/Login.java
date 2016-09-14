@@ -8,12 +8,21 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+
 import org.kjb.lei.sign.R;
+import org.kjb.lei.sign.main.SignMain;
+import org.kjb.lei.sign.model.AnClass;
+import org.kjb.lei.sign.model.AnClassInfo;
 import org.kjb.lei.sign.utils.all.StaticMethod;
 import org.kjb.lei.sign.utils.base.BaseActivity;
 import org.kjb.lei.sign.utils.connect.ConnectList;
 import org.kjb.lei.sign.utils.connect.ConnectListener;
 import org.kjb.lei.sign.utils.connect.ServerURL;
+import org.kjb.lei.sign.utils.tools.InfoTool;
+import org.kjb.lei.sign.utils.tools.UserTool;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -48,8 +57,10 @@ public class Login extends BaseActivity {
 
     private void getMessage() {
         name = getIntent().getStringExtra("name");
-        if (name == null) name = "";
-        loginEtName.setText(name);
+        if (!TextUtils.isEmpty(name)) {
+            loginEtName.setText(name);
+            loginEtPass.requestFocus();
+        }
     }
 
     @OnClick({R.id.login_btn_login, R.id.login_btn_register})
@@ -67,14 +78,22 @@ public class Login extends BaseActivity {
 
     @OnLongClick({R.id.login_btn_login})
     public boolean onLongClick(View view) {
+        //长按登录设置IP地址
         String ip = loginEtPass.getText().toString();
-        if (TextUtils.isEmpty(ip)) {
+        if (TextUtils.isEmpty(ip) && loginEtPass.getHint().equals("密码")) {
+            loginEtPass.setHint("IP地址");
             loginEtPass.setInputType(InputType.TYPE_TEXT_VARIATION_NORMAL);
             StaticMethod.showToast("请在密码框输入IP");
         } else {
-            ServerURL.setIP(ip);
-            loginEtPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            StaticMethod.showToast("IP修改成功");
+            if (!TextUtils.isEmpty(ip) && ip.contains(".")
+                    && loginEtPass.getHint().equals("IP地址")) {
+                ServerURL.setIP(ip);
+                StaticMethod.showToast("IP修改成功");
+                loginEtPass.setText("");
+            }
+            loginEtPass.setHint("密码");
+            loginEtPass.setInputType(InputType.TYPE_CLASS_TEXT
+                    | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         }
         return true;
     }
@@ -127,14 +146,27 @@ public class Login extends BaseActivity {
                 } else if (response == null || "-2".equals(response)) {
                     StaticMethod.showToast("登录失败");
                 } else {
+                    SignMain.is_teacher = is_teacher;
+                    SignMain.real_name = is_teacher ? "教师" : "学生";
+                    SignMain.class_table = new ArrayList<AnClass>();
                     if ("1".equals(response)) {//特殊情况，返回课表失败
-                        /////////////////////////////////////
-                        ////跳转到主页，告诉他获取信息失败吧
-//                        return;
+                        ////跳转到主页，告诉他获取信息失败
+                        StaticMethod.showToast("获取用户信息失败");
+                    } else {
+                        try {//解析用户信息
+                            AnClassInfo info = new Gson().fromJson(response, AnClassInfo.class);
+                            SignMain.real_name = info.getName();
+                            SignMain.class_table = info.getTable();
+                            //存储课程信息
+                            InfoTool.saveClassInfo(Login.this, response);
+                            //存储用户名与密码
+                            UserTool.saveUserInfo(Login.this, name, pass, is_teacher);
+                        } catch (Exception e) {
+                            StaticMethod.showToast("获取用户信息失败");
+                        }
                     }
-                    /////////////////////////////
-                    //解析json课程信息，建议使用GSON
-                    StaticMethod.showToast("SUCC");
+                    startActivity(new Intent(Login.this, SignMain.class));
+                    finish();
                 }
             }
         });

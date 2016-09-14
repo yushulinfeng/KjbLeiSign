@@ -8,8 +8,9 @@
 
     <ImageView
         android:id="@+id/menu_header_iv"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="5dp"
         android:scaleType="fitCenter"
         android:src="@android:drawable/sym_def_app_icon" />
 
@@ -17,9 +18,9 @@
         android:id="@+id/menu_header_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="Android"
         android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:textSize="20sp" />
 
 </LinearLayout>

@@ -10,10 +10,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.kjb.lei.sign.R;
 import org.kjb.lei.sign.fragment.ClassFragment;
 import org.kjb.lei.sign.fragment.SignFragment;
+import org.kjb.lei.sign.model.AnClass;
 import org.kjb.lei.sign.start.Login;
 import org.kjb.lei.sign.utils.all.StaticMethod;
 import org.kjb.lei.sign.utils.base.BaseActivity;
@@ -21,6 +24,7 @@ import org.kjb.lei.sign.utils.tools.TimerTool;
 import org.kjb.lei.sign.utils.tools.UserTool;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 
@@ -33,6 +37,10 @@ public class SignMain extends BaseActivity
     private long last_back_time = 0;
     private ArrayList<Fragment> fragments;
     private int index = 0;
+    //使用静态量便于操作（仅在Login/Welcome中初始化）
+    public static boolean is_teacher = false;//是否是教师
+    public static String real_name = "学生";//真实姓名
+    public static List<AnClass> class_table = null;//课程信息
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -40,6 +48,8 @@ public class SignMain extends BaseActivity
     NavigationView navView;
     @Bind(R.id.drawer_layout)
     DrawerLayout drawer;
+    TextView headerTv;
+    ImageView headerIv;
 
     @Override
     protected int getLayoutId() {
@@ -57,6 +67,11 @@ public class SignMain extends BaseActivity
         toggle.syncState();
         navView.setNavigationItemSelectedListener(this);
         navView.setCheckedItem(R.id.nav_sign);
+        headerTv = (TextView) navView.getHeaderView(0).findViewById(R.id.menu_header_tv);
+        headerIv = (ImageView) navView.getHeaderView(0).findViewById(R.id.menu_header_iv);
+        headerTv.setText(real_name);
+        headerIv.setImageResource(is_teacher ? R.drawable.icon_teacher
+                : R.drawable.icon_student);
 
         SignFragment sign = new SignFragment();
         fragments = new ArrayList<>();

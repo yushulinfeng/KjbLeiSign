@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
  * 用户存储工具类
  */
 public class UserTool {
-    private static final String USER_LOGIN_INFO = "user_info";
+    private static final String USER_LOGIN_INFO = "user_login_info";
 
     /**
      * 获取用户名、密码

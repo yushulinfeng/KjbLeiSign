@@ -150,6 +150,7 @@ public class StaticMethod {
     public static void hideProgressDialog() {
         if (dialog != null && dialog.isShowing())
             dialog.hide();
+        dialog = null;//需要这样，否则跨Activity会出错
     }
 
     /**
