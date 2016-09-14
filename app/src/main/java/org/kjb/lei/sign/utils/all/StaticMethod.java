@@ -6,6 +6,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import org.kjb.lei.sign.main.SignApplication;
 import org.kjb.lei.sign.utils.connect.ConnectEasy;
 import org.kjb.lei.sign.utils.connect.ConnectListener;
+import org.kjb.lei.sign.utils.connect.ServerURL;
 
 /**
  * 方法整合工具类
@@ -154,6 +156,7 @@ public class StaticMethod {
      * 发起网络请求
      */
     public static void POST(String url, final ConnectListener listener) {
+        if (!TextUtils.isEmpty(url)) url = ServerURL.getUrl(url);//封装URL
         ConnectEasy.POST(url, listener);
     }
 

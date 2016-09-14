@@ -1,6 +1,7 @@
 package org.kjb.lei.sign.start;
 
 import android.content.Intent;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import org.kjb.lei.sign.utils.connect.ServerURL;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 
 /**
  * 登录界面
@@ -61,6 +63,20 @@ public class Login extends BaseActivity {
                 finish();
                 break;
         }
+    }
+
+    @OnLongClick({R.id.login_btn_login})
+    public boolean onLongClick(View view) {
+        String ip = loginEtPass.getText().toString();
+        if (TextUtils.isEmpty(ip)) {
+            loginEtPass.setInputType(InputType.TYPE_TEXT_VARIATION_NORMAL);
+            StaticMethod.showToast("请在密码框输入IP");
+        } else {
+            ServerURL.setIP(ip);
+            loginEtPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            StaticMethod.showToast("IP修改成功");
+        }
+        return true;
     }
 
     public void login() {

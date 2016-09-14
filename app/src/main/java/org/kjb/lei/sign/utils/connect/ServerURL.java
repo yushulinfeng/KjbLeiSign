@@ -5,11 +5,12 @@ package org.kjb.lei.sign.utils.connect;
  */
 public class ServerURL {
     // 服务器IP地址
-    private static final String SERVER_IP = "http://192.168.123.1:8080/kjb_sign_lei/";
+    private static String SERVER_IP = "192.168.199.153";//123.1
+
     //注册与登录地址
-    public static final String LOGIN = SERVER_IP + "UserAction";
+    public static final String LOGIN = "UserAction";
     //签到与查看地址
-    public static final String SIGN = SERVER_IP + "SignAction";
+    public static final String SIGN = "SignAction";
 
     //类型常量
     public static final String REQUEST_TYPE = "REQUEST_TYPE";
@@ -17,4 +18,15 @@ public class ServerURL {
     public static final String TYPE_LOGIN = "LOGIN";
     public static final String TYPE_SIGN = "SIGN";
     public static final String TYPE_WATCH = "WATCH";
+
+    //获取请求地址
+    public static String getUrl(String url) {
+        return "http://" + SERVER_IP + ":8080/kjb_sign_lei/" + url;
+    }
+
+    // 设定IP地址
+    public static void setIP(String ip) {
+        SERVER_IP = ip;
+    }
+
 }
