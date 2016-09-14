@@ -17,6 +17,7 @@ import org.kjb.lei.sign.fragment.SignFragment;
 import org.kjb.lei.sign.start.Login;
 import org.kjb.lei.sign.utils.all.StaticMethod;
 import org.kjb.lei.sign.utils.base.BaseActivity;
+import org.kjb.lei.sign.utils.tools.TimerTool;
 import org.kjb.lei.sign.utils.tools.UserTool;
 
 import java.util.ArrayList;
@@ -57,14 +58,17 @@ public class SignMain extends BaseActivity
         navView.setNavigationItemSelectedListener(this);
         navView.setCheckedItem(R.id.nav_sign);
 
+        SignFragment sign = new SignFragment();
         fragments = new ArrayList<>();
-        fragments.add(new SignFragment());
+        fragments.add(sign);
         fragments.add(new ClassFragment());
         index = 0;
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.main_content, fragments.get(index), "")
                 .commit();
+        TimerTool.getInstance().setListener(sign);
+        TimerTool.getInstance().startTimer(20 * 1000);//20秒刷新一次位置
     }
 
     public void switchContent(Fragment from, Fragment to) {
@@ -128,4 +132,9 @@ public class SignMain extends BaseActivity
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected void onDestroy() {
+        TimerTool.getInstance().destroyTimer();
+        super.onDestroy();
+    }
 }

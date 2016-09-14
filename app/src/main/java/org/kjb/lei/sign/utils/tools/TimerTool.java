@@ -21,7 +21,7 @@ public class TimerTool {
     private TimerTool() {
     }
 
-    public TimerTool getInstance() {
+    public static TimerTool getInstance() {
         if (timerTool == null) timerTool = new TimerTool();
         return timerTool;
     }
@@ -75,7 +75,7 @@ public class TimerTool {
         isRun = false;
     }
 
-    interface TimerListener {
+    public interface TimerListener {
         void onTimerAction();
     }
 

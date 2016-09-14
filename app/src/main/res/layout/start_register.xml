@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:hint="教师工号"
             android:inputType="number"
-            android:maxLength="11"
+            android:maxLength="12"
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/black"

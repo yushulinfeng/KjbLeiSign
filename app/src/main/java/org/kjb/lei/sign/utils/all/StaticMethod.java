@@ -1,10 +1,12 @@
 package org.kjb.lei.sign.utils.all;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -20,6 +22,7 @@ import org.kjb.lei.sign.utils.connect.ConnectListener;
 public class StaticMethod {
     private static Handler handler = new Handler();
     private static float dp_px_scare = 0;//dp与px比例
+    private static ProgressDialog dialog = null;
 
     /**
      * 显示提示信息
@@ -46,6 +49,13 @@ public class StaticMethod {
                 showToast(text);
             }
         });
+    }
+
+    /**
+     * 显示提示信息
+     */
+    public static void showLog(Object text) {
+        Log.e("EEEEE", "" + text);
     }
 
     /**
@@ -115,6 +125,26 @@ public class StaticMethod {
                     InputMethodManager.HIDE_NOT_ALWAYS);
         } catch (Exception e) {
         }
+    }
+
+    /**
+     * 显示进度对话框
+     */
+    public static void showProgressDialog(String title) {
+        if (dialog == null)
+            dialog = new ProgressDialog(SignApplication.getInstance());
+        if (title != null)
+            dialog.setTitle(title);
+        if (!dialog.isShowing())
+            dialog.show();
+    }
+
+    /**
+     * 隐藏进度对话框
+     */
+    public static void hideProgressDialog() {
+        if (dialog != null && dialog.isShowing())
+            dialog.hide();
     }
 
     /**

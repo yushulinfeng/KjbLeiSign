@@ -4,7 +4,7 @@ import org.kjb.lei.sign.R;
 import org.kjb.lei.sign.utils.base.BaseFragment;
 
 /**
- * Created by YuShuLinFeng on 2016/9/14.
+ * 课程表界面
  */
 public class ClassFragment extends BaseFragment {
 
