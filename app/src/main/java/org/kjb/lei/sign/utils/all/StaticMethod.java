@@ -130,13 +130,16 @@ public class StaticMethod {
     /**
      * 显示进度对话框
      */
-    public static void showProgressDialog(String title) {
+    public static void showProgressDialog(Context context, String title) {
+        hideProgressDialog();
         if (dialog == null)
-            dialog = new ProgressDialog(SignApplication.getInstance());
+            dialog = new ProgressDialog(context);
         if (title != null)
             dialog.setTitle(title);
-        if (!dialog.isShowing())
+        try {//传入错误的context可能无法显示
             dialog.show();
+        } catch (Exception e) {
+        }
     }
 
     /**

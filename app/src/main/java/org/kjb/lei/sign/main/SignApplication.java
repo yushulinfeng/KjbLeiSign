@@ -2,6 +2,8 @@ package org.kjb.lei.sign.main;
 
 import android.app.Application;
 
+import com.yolanda.nohttp.NoHttp;
+
 /**
  * 应用层
  */
@@ -12,16 +14,12 @@ public class SignApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+
+        NoHttp.initialize(this);
     }
 
     public static SignApplication getInstance() {
         return instance;
     }
 
-    /**
-     * 初始化百度地图
-     */
-    private void initBaiduMap() {
-//        SDKInitializer.initialize(this);
-    }
 }

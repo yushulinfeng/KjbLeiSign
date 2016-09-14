@@ -5,7 +5,7 @@ package org.kjb.lei.sign.utils.connect;
  */
 public class ServerURL {
     // 服务器IP地址
-    private static final String SERVER_IP = "http://121.250.213.222:8080/kjb_sign_lei/";
+    private static final String SERVER_IP = "http://192.168.123.1:8080/kjb_sign_lei/";
     //注册与登录地址
     public static final String LOGIN = SERVER_IP + "UserAction";
     //签到与查看地址

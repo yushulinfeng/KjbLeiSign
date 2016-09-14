@@ -50,7 +50,7 @@ public class Register extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.register_btn_register:
-                StaticMethod.showToast("注册");
+                register();
                 break;
             case R.id.register_btn_login:
                 startActivity(new Intent(this, Login.class));
@@ -70,6 +70,14 @@ public class Register extends BaseActivity {
             StaticMethod.showToast("请填写注册信息");
             return;
         }
+        if (name.length() != 12) {
+            StaticMethod.showToast("请填写正确的工号");
+            return;
+        }
+        if (pass.length() < 6) {
+            StaticMethod.showToast("密码至少4位");
+            return;
+        }
         if (!pass.equals(pass2)) {
             StaticMethod.showToast("两次填写的密码不一致");
             return;
@@ -78,7 +86,7 @@ public class Register extends BaseActivity {
             return;
         }
         registerBtnRegister.setEnabled(false);
-        StaticMethod.showProgressDialog("正在注册……");
+        StaticMethod.showProgressDialog(this, "正在注册……");
         //连接后台
         StaticMethod.POST(ServerURL.LOGIN, new ConnectListener() {
             @Override
@@ -103,6 +111,8 @@ public class Register extends BaseActivity {
                     finish();
                 } else if ("-1".equals(response)) {
                     StaticMethod.showToast("该用户已注册");
+                } else if ("-3".equals(response)) {
+                    StaticMethod.showToast("工号与姓名匹配失败");
                 } else {
                     StaticMethod.showToast("注册失败");
                 }

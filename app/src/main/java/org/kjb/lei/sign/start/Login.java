@@ -40,6 +40,7 @@ public class Login extends BaseActivity {
 
     @Override
     protected void afterCreate() {
+        getMessage();
 
     }
 
@@ -53,7 +54,7 @@ public class Login extends BaseActivity {
     public void onButtonClick(View view) {
         switch (view.getId()) {
             case R.id.login_btn_login:
-                StaticMethod.showToast("登录");
+                login();
                 break;
             case R.id.login_btn_register:
                 startActivity(new Intent(this, Register.class));
@@ -72,8 +73,12 @@ public class Login extends BaseActivity {
             StaticMethod.showToast("请填写登录信息");
             return;
         }
+        if (name.length() != 12) {
+            StaticMethod.showToast("请填写正确的账号");
+            return;
+        }
         loginBtnLogin.setEnabled(false);
-        StaticMethod.showProgressDialog("正在登录……");
+        StaticMethod.showProgressDialog(this, "正在登录……");
         if (!Register.isSafe(pass, null, false)) {
             StaticMethod.getHandler().postDelayed(new Runnable() {
                 @Override
@@ -109,7 +114,7 @@ public class Login extends BaseActivity {
                     if ("1".equals(response)) {//特殊情况，返回课表失败
                         /////////////////////////////////////
                         ////跳转到主页，告诉他获取信息失败吧
-                        return;
+//                        return;
                     }
                     /////////////////////////////
                     //解析json课程信息，建议使用GSON
