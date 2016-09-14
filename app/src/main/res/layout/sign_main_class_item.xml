@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <TextView
+        android:id="@+id/class_item_tv_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="TEST"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/class_item_tv"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="TEST"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+</FrameLayout>

@@ -18,7 +18,7 @@ public class UserTool {
                 USER_LOGIN_INFO, Activity.MODE_PRIVATE);
         String name = mPref.getString("name", "");
         String pass = mPref.getString("pass", "");
-        String tea = mPref.getString("teacher", "0");//0学生，1教师
+        String tea = (mPref.getBoolean("teacher", false) ? "1" : "0");//0学生，1教师
         return new String[]{name, pass, tea};
     }
 
