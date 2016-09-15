@@ -6,15 +6,13 @@ import android.support.v7.widget.RecyclerView;
 
 import org.kjb.lei.sign.R;
 import org.kjb.lei.sign.main.SignMain;
-import org.kjb.lei.sign.model.AnClass;
 import org.kjb.lei.sign.utils.base.BaseFragment;
-
-import java.util.ArrayList;
 
 import butterknife.Bind;
 
 /**
  * 课程表界面
+ * （个人感觉挺实用的，哈哈）
  */
 public class ClassFragment extends BaseFragment {
 
@@ -27,7 +25,7 @@ public class ClassFragment extends BaseFragment {
     }
 
     @Override
-    protected void afterCreate() {
+    protected void afterCreate() {//加载课程表
         signClassRecycler.setItemAnimator(new DefaultItemAnimator());
         signClassRecycler.setHasFixedSize(true);
         GridLayoutManager girdLayoutManager = new GridLayoutManager(getActivity(), 6);

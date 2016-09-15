@@ -10,6 +10,7 @@ public class AnClass {
     private String place;//地点
     private String teacher;//教师
     private String id;//课程ID
+    private int colors = 0;//颜色索引（默认0，无颜色）
 
     public AnClass(String id, String name, String place, String time) {
         this.setId(id);
@@ -77,8 +78,16 @@ public class AnClass {
 
     // MINE
 
+    public int getColor() {
+        return colors;
+    }
+
+    public void setColor(int color) {
+        this.colors = color;
+    }
+
     public int getTime() {
-        return (week - 1) * 5 + index;
+        return (week - 1) * 5 + index;//1-35
     }
 
     public void setTime(String time) {// 给原生课表使用

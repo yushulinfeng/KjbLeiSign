@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -14,11 +13,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.kjb.lei.sign.start.Login;
-import org.kjb.lei.sign.start.Register;
-import org.kjb.lei.sign.start.Welcome;
 import org.kjb.lei.sign.utils.all.StaticMethod;
-import org.kjb.lei.sign.utils.tools.PositionTool;
+import org.kjb.lei.sign.utils.tools.TestTool;
 
 /**
  * 测试界面
@@ -48,6 +44,14 @@ public class SignTest extends Activity {
         scroll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT));
         scroll.addView(layout);
+        TextView tv = new TextView(context);
+        tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        tv.setTextSize(18);
+        tv.setGravity(Gravity.CENTER);
+        tv.setText("软件测试");
+        layout.addView(tv);
+        addDivider();
         return scroll;
     }
 
@@ -88,7 +92,7 @@ public class SignTest extends Activity {
     }
 
     private void addBtnCancel() {
-        addButton("退出", new View.OnClickListener() {
+        addButton("返回", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -97,24 +101,22 @@ public class SignTest extends Activity {
     }
 
     private void initButton() {
-        addButton("TEST", new View.OnClickListener() {
+        addButton("课程表模式开关", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("TEST");
+                boolean state = !TestTool.isTest();
+                TestTool.saveTestInfo(SignTest.this, state);
+                if (state) {//开启了模式
+                    StaticMethod.showToast("课表模式--已开启");
+                } else {
+                    StaticMethod.showToast("课表模式--已关闭");
+                }
+                Intent intent = new Intent(SignTest.this, SignMain.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
             }
         });
-        addButton("定位", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PositionTool.Point p = new PositionTool(context).getPosition();
-                Log.e("EEEEE", p.x + "-" + p.y);
-                StaticMethod.showLongToast(p.x + "\n" + p.y);
-            }
-        });
-        addButton("欢迎", Welcome.class);
-        addButton("注册", Register.class);
-        addButton("登录", Login.class);
-        addButton("主页", SignMain.class);
     }
 
 }

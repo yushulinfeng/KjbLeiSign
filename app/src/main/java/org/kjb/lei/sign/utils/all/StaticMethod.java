@@ -130,16 +130,22 @@ public class StaticMethod {
     }
 
     /**
+     * 位置检查，确保返回正确的默认位置
+     */
+    public static boolean positionCheck(String position) {
+        if (position == null)
+            return false;
+        else if (position.equals(""))
+            return false;
+        return false;
+    }
+
+    /**
      * 显示进度对话框
      */
     public static void showProgressDialog(Context context, String title) {
-        hideProgressDialog();
-        if (dialog == null)
-            dialog = new ProgressDialog(context);
-        if (title != null)
-            dialog.setTitle(title);
         try {//传入错误的context可能无法显示
-            dialog.show();
+            dialog = ProgressDialog.show(context, title, "请稍候……");
         } catch (Exception e) {
         }
     }
@@ -149,7 +155,10 @@ public class StaticMethod {
      */
     public static void hideProgressDialog() {
         if (dialog != null && dialog.isShowing())
-            dialog.hide();
+            try {//防止窗口句柄泄露报错
+                dialog.hide();
+            } catch (Exception e) {
+            }
         dialog = null;//需要这样，否则跨Activity会出错
     }
 

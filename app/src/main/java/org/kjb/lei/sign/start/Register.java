@@ -86,7 +86,7 @@ public class Register extends BaseActivity {
             return;
         }
         registerBtnRegister.setEnabled(false);
-        StaticMethod.showProgressDialog(this, "正在注册……");
+        StaticMethod.showProgressDialog(this, "正在注册");
         //连接后台
         StaticMethod.POST(ServerURL.LOGIN, new ConnectListener() {
             @Override

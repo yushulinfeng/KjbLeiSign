@@ -1,5 +1,6 @@
 package org.kjb.lei.sign.fragment;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -8,11 +9,12 @@ import android.view.ViewGroup;
 
 import org.kjb.lei.sign.R;
 import org.kjb.lei.sign.model.AnClass;
+import org.kjb.lei.sign.model.AnClassInfo;
 
 import java.util.List;
 
 /**
- * Created by YuShuLinFeng on 2016/9/15.
+ * 表格适配器
  */
 public class ClassAdapter extends RecyclerView.Adapter<ClassHolder> {
     private static final String[] weeks = {"星期一", "星期二",
@@ -37,18 +39,22 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassHolder> {
         holder.tv.setVisibility(View.VISIBLE);
         holder.tv.setGravity(Gravity.CENTER);
         holder.bg.setVisibility(View.GONE);
+        holder.getRootView().setBackgroundResource(0);
         if (position == 0) {
             holder.tv.setVisibility(View.GONE);
             holder.bg.setVisibility(View.GONE);
+            holder.getRootView().setBackgroundColor(Color.rgb(238, 238, 238));
             return;
         } else if (position < 6) {
             holder.tv.setVisibility(View.GONE);
             holder.bg.setVisibility(View.VISIBLE);
             holder.bg.setText(position + "");
+            holder.getRootView().setBackgroundColor(Color.rgb(238, 238, 238));
             return;
         } else if (position % 6 == 0) {
             holder.tv.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
             holder.tv.setText(weeks[position / 6 - 1]);
+            holder.getRootView().setBackgroundColor(Color.rgb(238, 238, 238));
             return;
         }
         //意外处理
@@ -60,10 +66,11 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassHolder> {
         position = position - position / 6 - 5;//换算到1-35
         String show = "";
         for (int i = 0; i < items.size(); i++) {
-            AnClass cls = items.get(position);
-            if (cls.getTime() == (i - 1)) {
+            AnClass cls = items.get(i);
+            if (cls.getTime() == position) {
                 if (!"".equals(show)) show += "\n";
                 show += cls.getName() + "\n" + cls.getPlace();
+                holder.getRootView().setBackgroundColor(AnClassInfo.colors[cls.getColor()]);
             }
         }
         holder.tv.setText(show);

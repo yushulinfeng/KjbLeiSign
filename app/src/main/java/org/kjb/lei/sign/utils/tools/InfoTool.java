@@ -15,5 +15,4 @@ public class InfoTool {
     public static String getClassInfo(Context context) {
         return ShareTool.getText(context, USER_CLASS_INFO);
     }
-
 }

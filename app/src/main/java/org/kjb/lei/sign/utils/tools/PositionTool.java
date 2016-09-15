@@ -3,7 +3,6 @@ package org.kjb.lei.sign.utils.tools;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
-import android.util.Log;
 
 import org.kjb.lei.sign.utils.all.StaticMethod;
 
@@ -50,6 +49,18 @@ public class PositionTool {
             this.x = x;
             this.y = y;
         }
+    }
+
+    public void saveReferPosition(Context context, String positionJson) {
+        ShareTool.saveText(context, positionJson, "position");
+    }
+
+    public Point getReferPosition(Context context, String placeName) {
+        String text = ShareTool.getText(context, "position");
+        if (!StaticMethod.positionCheck(text)) {
+            return new Point(36.666383, 117.134116);
+        }
+        return null;
     }
 
 }

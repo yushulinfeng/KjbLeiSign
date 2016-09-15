@@ -7,7 +7,7 @@ import android.widget.TextView;
 import org.kjb.lei.sign.R;
 
 /**
- * Created by YuShuLinFeng on 2016/9/15.
+ * 表格容器
  */
 public class ClassHolder extends RecyclerView.ViewHolder {
     public TextView tv;

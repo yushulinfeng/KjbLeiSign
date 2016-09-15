@@ -11,7 +11,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 /**
- * Created by YuShuLinFeng on 2016/9/15.
+ * 表格分隔线
  */
 public class ClassDivider extends RecyclerView.ItemDecoration {
     private static final int[] ATTRS = new int[]{android.R.attr.listDivider};

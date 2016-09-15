@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import org.kjb.lei.sign.model.AnClass;
 import org.kjb.lei.sign.start.Login;
 import org.kjb.lei.sign.utils.all.StaticMethod;
 import org.kjb.lei.sign.utils.base.BaseActivity;
+import org.kjb.lei.sign.utils.tools.TestTool;
 import org.kjb.lei.sign.utils.tools.TimerTool;
 import org.kjb.lei.sign.utils.tools.UserTool;
 
@@ -59,7 +61,12 @@ public class SignMain extends BaseActivity
     @Override
     protected void afterCreate() {
         setSupportActionBar(toolbar);
+        initMenu();
+        initFragment();
+        initTestExpand();
+    }
 
+    private void initMenu() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
@@ -72,7 +79,9 @@ public class SignMain extends BaseActivity
         headerTv.setText(real_name);
         headerIv.setImageResource(is_teacher ? R.drawable.icon_teacher
                 : R.drawable.icon_student);
+    }
 
+    private void initFragment() {
         SignFragment sign = new SignFragment();
         fragments = new ArrayList<>();
         fragments.add(sign);
@@ -83,7 +92,24 @@ public class SignMain extends BaseActivity
                 .replace(R.id.main_content, fragments.get(index), "")
                 .commit();
         TimerTool.getInstance().setListener(sign);
-        TimerTool.getInstance().startTimer(20 * 1000);//20秒刷新一次位置
+        TimerTool.getInstance().startTimer(30 * 1000);//30秒刷新一次位置
+    }
+
+    private void initTestExpand() {
+        headerIv.setOnLongClickListener(
+                new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        drawer.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(SignMain.this, SignTest.class));
+                        return true;
+                    }
+                });
+        if (TestTool.isTest()) {
+            index = 1;
+            switchContent(fragments.get(0), fragments.get(1));
+            navView.setCheckedItem(R.id.nav_class);
+        }
     }
 
     public void switchContent(Fragment from, Fragment to) {

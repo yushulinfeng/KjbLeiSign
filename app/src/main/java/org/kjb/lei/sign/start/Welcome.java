@@ -16,6 +16,7 @@ import org.kjb.lei.sign.utils.connect.ConnectList;
 import org.kjb.lei.sign.utils.connect.ConnectListener;
 import org.kjb.lei.sign.utils.connect.ServerURL;
 import org.kjb.lei.sign.utils.tools.InfoTool;
+import org.kjb.lei.sign.utils.tools.TestTool;
 import org.kjb.lei.sign.utils.tools.UserTool;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class Welcome extends BaseActivity {
 
     private void gotoMain() {
         user = UserTool.getUserInfo(this);
+        TestTool.initTestInfo(this);
         if (TextUtils.isEmpty(user[0])) {//没有登录历史
             startActivity(new Intent(this, Login.class));
             finish();
@@ -72,7 +74,7 @@ public class Welcome extends BaseActivity {
                 StaticMethod.showLog(response);//////
                 if ("1".equals(response)) {//登录成功
                     try {//解析用户信息
-                        String info_str=InfoTool.getClassInfo(Welcome.this);
+                        String info_str = InfoTool.getClassInfo(Welcome.this);
                         AnClassInfo info = new Gson().fromJson(info_str, AnClassInfo.class);
                         SignMain.real_name = info.getName();
                         SignMain.class_table = info.getTable();
