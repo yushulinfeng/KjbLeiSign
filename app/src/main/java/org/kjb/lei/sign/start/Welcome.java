@@ -44,13 +44,15 @@ public class Welcome extends BaseActivity {
 
     private void gotoMain() {
         user = UserTool.getUserInfo(this);
-        TestTool.initTestInfo(this);
         if (TextUtils.isEmpty(user[0])) {//没有登录历史
             startActivity(new Intent(this, Login.class));
             finish();
             return;
         }
-        autoLogin();//有历史就自动登录
+        if (TestTool.initTestInfo(this))
+            autoLoginSuccess();//课表模式不进行网络连接
+        else
+            autoLogin();//有历史就自动登录
     }
 
     //自动登录
@@ -73,16 +75,7 @@ public class Welcome extends BaseActivity {
             public void onResponse(String response) {
                 StaticMethod.showLog(response);//////
                 if ("1".equals(response)) {//登录成功
-                    try {//解析用户信息
-                        String info_str = InfoTool.getClassInfo(Welcome.this);
-                        AnClassInfo info = new Gson().fromJson(info_str, AnClassInfo.class);
-                        SignMain.real_name = info.getName();
-                        SignMain.class_table = info.getTable();
-                    } catch (Exception e) {
-                        StaticMethod.showToast("获取用户信息失败");
-                    }
-                    startActivity(new Intent(Welcome.this, SignMain.class));
-                    finish();
+                    autoLoginSuccess();
                 } else {
                     StaticMethod.showToast("自动登录失败");
                     Intent intent = new Intent(Welcome.this, Login.class);
@@ -92,6 +85,19 @@ public class Welcome extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void autoLoginSuccess() {
+        try {//解析用户信息
+            String info_str = InfoTool.getClassInfo(Welcome.this);
+            AnClassInfo info = new Gson().fromJson(info_str, AnClassInfo.class);
+            SignMain.real_name = info.getName();
+            SignMain.class_table = info.getTable();
+        } catch (Exception e) {
+            StaticMethod.showToast("获取用户信息失败");
+        }
+        startActivity(new Intent(Welcome.this, SignMain.class));
+        finish();
     }
 
 }
