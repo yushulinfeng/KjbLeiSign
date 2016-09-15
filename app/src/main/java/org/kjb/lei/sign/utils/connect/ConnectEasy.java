@@ -9,6 +9,9 @@ import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.RequestQueue;
 import com.yolanda.nohttp.rest.Response;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 /**
  * 简化网络连接类
  */
@@ -34,7 +37,11 @@ public class ConnectEasy {
             @Override
             public void onSucceed(int what, Response<String> response) {
                 if (response != null)
-                    listener.onResponse(response.get());
+                    try {
+                        listener.onResponse(URLDecoder.decode(response.get(), "UTF-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        listener.onResponse(null);
+                    }
                 else
                     listener.onResponse(null);
             }

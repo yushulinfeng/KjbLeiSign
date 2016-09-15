@@ -60,6 +60,7 @@ public class Login extends BaseActivity {
         name = getIntent().getStringExtra("name");
         if (!TextUtils.isEmpty(name)) {
             loginEtName.setText(name);
+            loginCbTeacher.setChecked(true);
             loginEtPass.requestFocus();
         }
     }

@@ -57,7 +57,7 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
     @Override
     public void onTimerAction() {
         Log.e("EEEEE", "TIMER");
-        if (init_finish) return;
+        if (!init_finish) return;
         if (TestTool.isTest()) return;
         if (SignMain.is_teacher)
             teaSeeSign();
