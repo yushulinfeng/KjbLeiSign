@@ -31,7 +31,7 @@ import java.util.List;
 import butterknife.Bind;
 
 /**
- * 主界面（建议使用TimerTask）
+ * 主界面
  */
 @SuppressWarnings({"deprecation", "ConstantConditions"})
 public class SignMain extends BaseActivity
