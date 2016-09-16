@@ -59,10 +59,14 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
         Log.e("EEEEE", "TIMER");
         if (!init_finish) return;
         if (TestTool.isTest()) return;
-        if (SignMain.is_teacher)
-            teaSeeSign();
-        else
-            stuSign();
+        try {
+            if (SignMain.is_teacher)
+                teaSeeSign();
+            else
+                stuSign();
+        }catch(Exception e){
+            signTvShow.setText("-签到-");
+        }
     }
 
     private void teaSeeSign() {
@@ -76,9 +80,11 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
         int time_int = time.hour * 100 + time.minute;
         //周次
         week = time.weekDay + 1;//1-7
+        index = 0;
         //节次
-        for (index = 0; index < 5; index++) {
-            if (time_int < time_start[index])
+        for (int i = 0; i < 5; i++) {
+            index = i;
+            if (time_int < time_start[i])
                 break;
         }
         if (time_int > time_start[4])
@@ -159,15 +165,19 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
         int time_int = time.hour * 100 + time.minute;
         //周次
         week = time.weekDay + 1;//1-7
+        index = 0;
         //节次
-        for (index = 0; index < 5; index++) {
-            if (time_int < time_end[index])
+        for (int i = 0; i < 5; i++) {
+            index = i;
+            if (time_int < time_end[i])
                 break;
         }
         if (time_int > time_start[index])//签到时间范围内
             needSign = true;
-        if (time_int > time_end[4])
+        if (time_int > time_end[4]) {
+            needSign = false;
             index++;//那天的课结束了
+        }
         index++;// 1-6
         //显示信息的处理
         String class_show = "";
@@ -197,12 +207,8 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
         //没有教师，不支持签到
         if (TextUtils.isEmpty(tea_temp1) && TextUtils.isEmpty(tea_temp2)) {
             needSign = false;
-            class_show += "\n--本课程无需签到--\n";
-            signTvShow.setText(class_show);
-            return;
-        }
-        //如果已经签到
-        if (sign_state == last_time) {
+            class_show += "\n--本课程无需签到--\n----\n";
+        } else if (sign_state == last_time) {//如果已经签到
             needSign = false;
             class_show += "\n--已签到--\n";
         }
@@ -211,11 +217,15 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
         PositionTool.Point refer = position.getReferPosition(getActivity(), place);
         //4区： 36.666383，117.134116
         //宿舍：36.666922，117.135008
-        if (Math.abs(point.x - refer.x) > 0.0005 ||
-                Math.abs(point.y - refer.y) > 0.0005) {//不再签到范围内
+        if (point != null) {
+            if (Math.abs(point.x - refer.x) > 0.0005 ||
+                    Math.abs(point.y - refer.y) > 0.0005) {//不再签到范围内
+                needSign = false;
+            }
+            class_show += "--当前坐标--\n" + point.x + "," + point.y;
+        } else {
             needSign = false;
         }
-        class_show += "--当前坐标--\n" + point.x + "," + point.y;
         signTvShow.setText(class_show);
         if (!needSign)
             return;

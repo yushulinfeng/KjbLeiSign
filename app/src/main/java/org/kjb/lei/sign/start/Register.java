@@ -75,7 +75,7 @@ public class Register extends BaseActivity {
             return;
         }
         if (pass.length() < 6) {
-            StaticMethod.showToast("密码至少4位");
+            StaticMethod.showToast("密码至少6位");
             return;
         }
         if (!pass.equals(pass2)) {

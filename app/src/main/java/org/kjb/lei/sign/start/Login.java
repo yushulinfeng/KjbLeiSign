@@ -84,7 +84,7 @@ public class Login extends BaseActivity {
         String ip = loginEtPass.getText().toString();
         if (TextUtils.isEmpty(ip) && loginEtPass.getHint().equals("密码")) {
             loginEtPass.setHint("IP地址");
-            loginEtPass.setInputType(InputType.TYPE_TEXT_VARIATION_NORMAL);
+            loginEtPass.setInputType(InputType.TYPE_CLASS_TEXT);
             StaticMethod.showToast("请在密码框输入IP");
         } else {
             if (!TextUtils.isEmpty(ip) && ip.contains(".")

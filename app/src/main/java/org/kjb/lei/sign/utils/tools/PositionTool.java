@@ -23,19 +23,23 @@ public class PositionTool {
      * 获取当前位置
      */
     public Point getPosition() {
-        //获取所有可用的位置提供器
-        List<String> providers = manager.getProviders(true);
-        String provider = null;
-        if (providers.contains(manager.GPS_PROVIDER)) {// GPS位置
-            provider = manager.GPS_PROVIDER;
-        } else if (providers.contains(manager.NETWORK_PROVIDER)) {//网络位置
-            provider = manager.NETWORK_PROVIDER;
-        } else {//获取位置失败
+        try {
+            //获取所有可用的位置提供器
+            List<String> providers = manager.getProviders(true);
+            String provider = null;
+            if (providers.contains(manager.GPS_PROVIDER)) {// GPS位置
+                provider = manager.GPS_PROVIDER;
+            } else if (providers.contains(manager.NETWORK_PROVIDER)) {//网络位置
+                provider = manager.NETWORK_PROVIDER;
+            } else {//获取位置失败
+                return null;
+            }
+            @SuppressWarnings("MissingPermission")
+            Location location = manager.getLastKnownLocation(provider);
+            return new Point(location.getLatitude(), location.getLongitude());
+        } catch (Exception e) {
             return null;
         }
-        @SuppressWarnings("MissingPermission")
-        Location location = manager.getLastKnownLocation(provider);
-        return new Point(location.getLatitude(), location.getLongitude());
     }
 
     /**

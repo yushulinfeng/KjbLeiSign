@@ -5,7 +5,7 @@ package org.kjb.lei.sign.utils.connect;
  */
 public class ServerURL {
     // 服务器IP地址
-    private static String SERVER_IP = "120.27.98.95";//123.1//199.153
+    private static String SERVER_IP = "120.27.98.95"; //120.27.98.95
 
     //注册与登录地址
     public static final String LOGIN = "UserAction";
