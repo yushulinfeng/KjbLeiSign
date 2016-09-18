@@ -216,10 +216,10 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
         //没有教师，不支持签到
         if (TextUtils.isEmpty(tea_temp1) && TextUtils.isEmpty(tea_temp2)) {
             needSign = false;
-            class_show += "\n--本课程无需签到--\n----\n";
+            class_show += "--本课程无需签到--\n----\n";
         } else if (sign_state == last_time) {//如果已经签到
             needSign = false;
-            class_show += "\n--已签到--\n";
+            class_show += "--已签到--\n";
         }
         //获取位置信息，判断是否在位置范围内
         point = position.getPosition();//本人位置
