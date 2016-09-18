@@ -65,12 +65,16 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassHolder> {
         //加载课程
         position = position - position / 6 - 5;//换算到1-35
         String show = "";
+        AnClass last_cls = null;
         for (int i = 0; i < items.size(); i++) {
             AnClass cls = items.get(i);
             if (cls.getTime() == position) {
-                if (!"".equals(show)) show += "\n";
-                show += cls.getName() + "\n" + cls.getPlace();
-                holder.getRootView().setBackgroundColor(AnClassInfo.colors[cls.getColor()]);
+                if (last_cls == null || !last_cls.getName().equals(cls.getName())) {
+                    if (!"".equals(show)) show += "\n";
+                    show += cls.getName() + "\n" + cls.getPlace();
+                    holder.getRootView().setBackgroundColor(AnClassInfo.colors[cls.getColor()]);
+                    last_cls = cls;
+                }
             }
         }
         holder.tv.setText(show);
