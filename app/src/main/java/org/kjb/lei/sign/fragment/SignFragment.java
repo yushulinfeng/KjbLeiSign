@@ -1,5 +1,10 @@
 package org.kjb.lei.sign.fragment;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.text.format.Time;
 import android.util.Log;
@@ -47,10 +52,12 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
 
     @Override
     protected void afterCreate() {
+        init_finish = false;
         position = new PositionTool(getActivity());
         userid = UserTool.getUserInfo(getActivity())[0];
         AnClassInfo.initTableColor(SignMain.class_table);
         if (TestTool.isTest()) signTvShow.setText("已禁用签到\n长按头像进行设置");
+        getLocationPermission();//6.0优化
         init_finish = true;
     }
 
@@ -64,7 +71,7 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
                 teaSeeSign();
             else
                 stuSign();
-        }catch(Exception e){
+        } catch (Exception e) {
             signTvShow.setText("-签到-");
         }
     }
@@ -79,7 +86,8 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
         time.setToNow();
         int time_int = time.hour * 100 + time.minute;
         //周次
-        week = time.weekDay + 1;//1-7
+        week = time.weekDay;
+        if (week == 0) week = 7;//1-7
         index = 0;
         //节次
         for (int i = 0; i < 5; i++) {
@@ -164,7 +172,8 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
         time.setToNow();
         int time_int = time.hour * 100 + time.minute;
         //周次
-        week = time.weekDay + 1;//1-7
+        week = time.weekDay;//0是周日
+        if (week == 0) week = 7;//1-7
         index = 0;
         //节次
         for (int i = 0; i < 5; i++) {
@@ -203,7 +212,7 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
             }
         }
         class_show = "--下一节课--\n" + class_show + "\n----\n"
-                + (needSign ? "签到进行中" : "尚未开始签到");
+                + (needSign ? "签到进行中\n" : "尚未开始签到\n");
         //没有教师，不支持签到
         if (TextUtils.isEmpty(tea_temp1) && TextUtils.isEmpty(tea_temp2)) {
             needSign = false;
@@ -257,6 +266,25 @@ public class SignFragment extends BaseFragment implements TimerTool.TimerListene
                 }
             }
         });
+    }
+
+
+    //////////拓展内容，6.0及以上的权限处理
+    public static final int LOCATION_CODE = 1;
+
+    private boolean getLocationPermission() {
+        if (Build.VERSION.SDK_INT < 23)//API23之前可直接获取
+            return true;
+        int p1 = ContextCompat.checkSelfPermission(
+                getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION);
+        int p2 = ContextCompat.checkSelfPermission(
+                getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
+        if ((p1 == p2) && (p1 == PackageManager.PERMISSION_GRANTED))
+            return true;//都已经授权
+        ActivityCompat.requestPermissions(getActivity(),//这个会使返回在Activity中
+                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_CODE);
+        return false;
     }
 
 }

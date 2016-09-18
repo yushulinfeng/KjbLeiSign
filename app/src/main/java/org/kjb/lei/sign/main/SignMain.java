@@ -178,4 +178,18 @@ public class SignMain extends BaseActivity
         TimerTool.getInstance().destroyTimer();
         super.onDestroy();
     }
+
+
+//    @Override
+//    public void onRequestPermissionsResult(
+//            int requestCode, String[] permissions, int[] grantResults) {
+//        if (requestCode == SignFragment.LOCATION_CODE) {
+//            int p1 = grantResults[0], p2 = grantResults[1];
+//            if ((p1 == p2) && (p1 == PackageManager.PERMISSION_GRANTED)) {// Permission Granted
+//            } else { // Permission Denied
+//            }
+//        }
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//    }
+
 }

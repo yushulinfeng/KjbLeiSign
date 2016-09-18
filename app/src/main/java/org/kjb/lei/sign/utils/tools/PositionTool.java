@@ -3,6 +3,7 @@ package org.kjb.lei.sign.utils.tools;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
+import android.util.Log;
 
 import org.kjb.lei.sign.utils.all.StaticMethod;
 
@@ -27,17 +28,21 @@ public class PositionTool {
             //获取所有可用的位置提供器
             List<String> providers = manager.getProviders(true);
             String provider = null;
-            if (providers.contains(manager.GPS_PROVIDER)) {// GPS位置
-                provider = manager.GPS_PROVIDER;
-            } else if (providers.contains(manager.NETWORK_PROVIDER)) {//网络位置
-                provider = manager.NETWORK_PROVIDER;
+            if (providers.contains(LocationManager.GPS_PROVIDER)) {// GPS位置
+                provider = LocationManager.GPS_PROVIDER;
+            } else if (providers.contains(LocationManager.NETWORK_PROVIDER)) {//网络位置
+                provider = LocationManager.NETWORK_PROVIDER;
             } else {//获取位置失败
+                Log.e("EEEE", "ERROR");
                 return null;
             }
             @SuppressWarnings("MissingPermission")
             Location location = manager.getLastKnownLocation(provider);
+            Log.e("EEEE", (location == null) + "-" + provider);
+            Log.e("EEEE", location.getLatitude() + "---" + location.getLongitude());
             return new Point(location.getLatitude(), location.getLongitude());
         } catch (Exception e) {
+            Log.e("EEEE--EE", e.getMessage() + "");
             return null;
         }
     }
